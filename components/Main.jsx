@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchData } from '../redux/slice'
 import { useRouter } from 'expo-router'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const Item = ({item}) => {
     return (
@@ -14,6 +15,12 @@ const Item = ({item}) => {
             <Text
                 style={{fontSize: 16}}
             >${item.price}</Text>
+
+            <Ionicons name='heart-outline' size={24} color='red' style={{
+                position: 'absolute',
+                top: 10,
+                left: 10
+            }} />
         </View>
     )
 }
