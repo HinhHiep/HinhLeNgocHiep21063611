@@ -1,7 +1,9 @@
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchData } from '../redux/slice'
+import { useRouter } from 'expo-router'
+
 const Item = ({item}) => {
     return (
         <View style={styles.itemContainer}>
@@ -19,11 +21,16 @@ const Item = ({item}) => {
 const Main = () => {
     const dispatch = useDispatch()
     const bike = useSelector((state) => state.bike.data)
-
+    const router = useRouter()
     useEffect(() => {
         dispatch(fetchData())
     }, [dispatch])
-    console.log(bike)
+    // console.log(bike)
+    const addHandler = () => {
+        router.push('add')
+    }
+
+
   return (
     <View style={styles.container}>
       <Text
@@ -52,6 +59,24 @@ const Main = () => {
             keyExtractor={(item) => item.id}
             numColumns={2}
             />
+            <TouchableOpacity
+                style={{
+                    backgroundColor: 'red',
+                    borderRadius: 10,
+                    padding: 10,
+                    marginHorizontal: 20,
+                    marginTop: 20
+                }}
+            >
+                <Text
+                    style={{
+                        textAlign: 'center',
+                        color: 'white',
+                        fontSize: 16
+                    }}
+                    onPress={addHandler}
+                >Add</Text>
+            </TouchableOpacity>
     </View>
   )
 }
